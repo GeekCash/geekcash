@@ -1,0 +1,20 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="bg">locale/geekcash_bg.qm</file>
+        <file alias="de">locale/geekcash_de.qm</file>
+        <file alias="en">locale/geekcash_en.qm</file>
+        <file alias="es">locale/geekcash_es.qm</file>
+        <file alias="fi">locale/geekcash_fi.qm</file>
+        <file alias="fr">locale/geekcash_fr.qm</file>
+        <file alias="it">locale/geekcash_it.qm</file>
+        <file alias="ja">locale/geekcash_ja.qm</file>
+        <file alias="pl">locale/geekcash_pl.qm</file>
+        <file alias="pt">locale/geekcash_pt.qm</file>
+        <file alias="ru">locale/geekcash_ru.qm</file>
+        <file alias="sk">locale/geekcash_sk.qm</file>
+        <file alias="sv">locale/geekcash_sv.qm</file>
+        <file alias="vi">locale/geekcash_vi.qm</file>
+        <file alias="zh_CN">locale/geekcash_zh_CN.qm</file>
+        <file alias="zh_TW">locale/geekcash_zh_TW.qm</file>
+    </qresource>
+</RCC>

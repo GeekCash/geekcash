@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Name=GeekCash
+Comment=Connect to the GeekCash P2P Network
+Comment[de]=Verbinde mit dem GeekCash peer-to-peer Netzwerk
+Comment[fr]=GeekCash, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=GeekCash, eşten eşe kriptografik sanal para birimi
+Exec=geekcash-qt %u
+Terminal=false
+Type=Application
+Icon=bitcoin128
+MimeType=x-scheme-handler/geekcash;
+Categories=Office;Finance;
+StartupWMClass=Geekcash-qt
