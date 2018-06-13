@@ -358,7 +358,7 @@ void BitcoinGUI::createActions()
         connect(masternodeAction, SIGNAL(triggered()), this, SLOT(gotoMasternodePage()));
     }
 
-    toolsAction = new QAction(QIcon(":/icons/" + theme + "/toolbox"), "Tools", this);
+    toolsAction = new QAction(QIcon(":/icons/" + theme + "/toolbox"), tr("&Tools"), this);
     toolsAction->setStatusTip(tr("Tools"));
     toolsAction->setToolTip(toolsAction->statusTip());
     toolsAction->setCheckable(true);
