@@ -9,6 +9,7 @@
 #include <QMenu>
 #include <QTimer>
 #include <QWidget>
+#include <QtWidgets/QTableWidget>
 
 #define MY_MASTERNODELIST_UPDATE_SECONDS                 60
 #define MASTERNODELIST_UPDATE_SECONDS                    15
@@ -24,6 +25,31 @@ class WalletModel;
 QT_BEGIN_NAMESPACE
 class QModelIndex;
 QT_END_NAMESPACE
+
+class QTableNumItem : public QTableWidgetItem
+{
+
+public:
+    QTableNumItem(int64_t n, QString const & text)
+        : QTableWidgetItem(text)
+        , f_value(n)
+    {
+    }
+
+    bool operator < (QTableWidgetItem const & rhs) const
+    {
+        QTableNumItem const * r(dynamic_cast<QTableNumItem const *>(&rhs));
+        if(r == nullptr)
+        {
+            return false;
+        }
+        return f_value < r->f_value;
+    }
+
+private:
+    int64_t      f_value = 0;
+};
+
 
 /** Masternode Manager page widget */
 class MasternodeList : public QWidget
