@@ -7,7 +7,7 @@
 #define BITCOIN_BITCOINCONSENSUS_H
 
 #if defined(BUILD_BITCOIN_INTERNAL) && defined(HAVE_CONFIG_H)
-#include "config/geekcash-config.h"
+#include "config/dash-config.h"
   #if defined(_WIN32)
     #if defined(DLL_EXPORT)
       #if defined(HAVE_FUNC_ATTRIBUTE_DLLEXPORT)
@@ -39,6 +39,7 @@ typedef enum geekcashconsensus_error_t
     geekcashconsensus_ERR_TX_INDEX,
     geekcashconsensus_ERR_TX_SIZE_MISMATCH,
     geekcashconsensus_ERR_TX_DESERIALIZE,
+    geekcashconsensus_ERR_INVALID_FLAGS,
 } geekcashconsensus_error;
 
 /** Script verification flags */
@@ -47,7 +48,12 @@ enum
     geekcashconsensus_SCRIPT_FLAGS_VERIFY_NONE                = 0,
     geekcashconsensus_SCRIPT_FLAGS_VERIFY_P2SH                = (1U << 0), // evaluate P2SH (BIP16) subscripts
     geekcashconsensus_SCRIPT_FLAGS_VERIFY_DERSIG              = (1U << 2), // enforce strict DER (BIP66) compliance
+    geekcashconsensus_SCRIPT_FLAGS_VERIFY_NULLDUMMY           = (1U << 4), // enforce NULLDUMMY (BIP147)
     geekcashconsensus_SCRIPT_FLAGS_VERIFY_CHECKLOCKTIMEVERIFY = (1U << 9), // enable CHECKLOCKTIMEVERIFY (BIP65)
+    geekcashconsensus_SCRIPT_FLAGS_VERIFY_CHECKSEQUENCEVERIFY = (1U << 10), // enable CHECKSEQUENCEVERIFY (BIP112)
+    geekcashconsensus_SCRIPT_FLAGS_VERIFY_ALL                 = geekcashconsensus_SCRIPT_FLAGS_VERIFY_P2SH | geekcashconsensus_SCRIPT_FLAGS_VERIFY_DERSIG |
+                                                            geekcashconsensus_SCRIPT_FLAGS_VERIFY_NULLDUMMY | geekcashconsensus_SCRIPT_FLAGS_VERIFY_CHECKLOCKTIMEVERIFY |
+                                                            geekcashconsensus_SCRIPT_FLAGS_VERIFY_CHECKSEQUENCEVERIFY
 };
 
 /// Returns 1 if the input nIn of the serialized transaction pointed to by

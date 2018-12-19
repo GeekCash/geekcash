@@ -877,6 +877,7 @@ UniValue getblockchaininfo(const UniValue& params, bool fHelp)
     softforks.push_back(SoftForkDesc("bip65", 4, tip, consensusParams));
     bip9_softforks.push_back(BIP9SoftForkDesc("csv", consensusParams, Consensus::DEPLOYMENT_CSV));
     bip9_softforks.push_back(BIP9SoftForkDesc("dip0001", consensusParams, Consensus::DEPLOYMENT_DIP0001));
+    bip9_softforks.push_back(BIP9SoftForkDesc("bip147", consensusParams, Consensus::DEPLOYMENT_BIP147));    
     obj.push_back(Pair("softforks",             softforks));
     obj.push_back(Pair("bip9_softforks", bip9_softforks));
 
