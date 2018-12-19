@@ -120,11 +120,18 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nWindowSize = 4032;
         consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nThreshold = 3226; // 80% of 4032
 
+        // Deployment of BIP147
+        consensus.vDeployments[Consensus::DEPLOYMENT_BIP147].bit = 2;
+        consensus.vDeployments[Consensus::DEPLOYMENT_BIP147].nStartTime = 1545091200; // Dec 18th, 2018
+        consensus.vDeployments[Consensus::DEPLOYMENT_BIP147].nTimeout = 1576627200; // Dec 18th, 2019
+        consensus.vDeployments[Consensus::DEPLOYMENT_BIP147].nWindowSize = 4032;
+        consensus.vDeployments[Consensus::DEPLOYMENT_BIP147].nThreshold = 3226; // 80% of 4032
+
         // The best chain should have at least this much work.        
-        consensus.nMinimumChainWork = uint256S("000000000000000000000000000000000000000000000000002c51c8e4beb570"); // 46789
+        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000000027c616e7f42533e"); // 305600
 
         // By default assume that the signatures in ancestors of this block are valid.        
-        consensus.defaultAssumeValid = uint256S("0x000007de1b1fb05d656af7b75b398efff9e9562ab73047750394527f0f239e62"); // genesis
+        consensus.defaultAssumeValid = uint256S("0x0000000000e369b212b6dff4da7fdb43ddf6309a7a29bf28cfcfd67f40b6cc1f"); // 305600
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -233,10 +240,11 @@ public:
             boost::assign::map_list_of            
             ( 0, uint256S("0x000007de1b1fb05d656af7b75b398efff9e9562ab73047750394527f0f239e62"))
             ( 20800, uint256S("0x0000000009aeb38c5be87990fd7f1a38e90a641f61310000ab17fdcb973c86f3"))
-            ( 46789, uint256S("0x0000000000412e9f847e6f1e331ccb36084946effe35386a4eeee3216d5bf079"))         
-            ( 160800, uint256S("0x000000000015df4608e7307463e8e84a24019bd70608bc7de9d9a86f19e071db")),           
-            1535959853, // * UNIX timestamp of last checkpoint block
-            219180,    // * total number of transactions between genesis and last checkpoint
+            ( 46789, uint256S("0x0000000000412e9f847e6f1e331ccb36084946effe35386a4eeee3216d5bf079"))   
+            ( 160800, uint256S("0x000000000015df4608e7307463e8e84a24019bd70608bc7de9d9a86f19e071db"))   
+            ( 305600, uint256S("0x0000000000e369b212b6dff4da7fdb43ddf6309a7a29bf28cfcfd67f40b6cc1f")),                   
+            1545094550, // * UNIX timestamp of last checkpoint block
+            430337,    // * total number of transactions between genesis and last checkpoint
                         //   (the tx=... number in the SetBestChain debug.log lines)
             5000        // * estimated number of transactions per day after checkpoint
         };
@@ -294,6 +302,13 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nTimeout = 1537228800; // Sep 18th, 2018
         consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nWindowSize = 100;
         consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nThreshold = 50; // 50% of 100
+
+         // Deployment of BIP147
+        consensus.vDeployments[Consensus::DEPLOYMENT_BIP147].bit = 2;
+        consensus.vDeployments[Consensus::DEPLOYMENT_BIP147].nStartTime = 1544655600; // Dec 13th, 2018
+        consensus.vDeployments[Consensus::DEPLOYMENT_BIP147].nTimeout = 1576191600; // Dec 13th, 2019
+        consensus.vDeployments[Consensus::DEPLOYMENT_BIP147].nWindowSize = 100;
+        consensus.vDeployments[Consensus::DEPLOYMENT_BIP147].nThreshold = 50; // 50% of 100
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000100010"); // 37900
@@ -411,6 +426,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].bit = 1;
         consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nStartTime = 0;
         consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nTimeout = 999999999999ULL;
+
+        consensus.vDeployments[Consensus::DEPLOYMENT_BIP147].bit = 2;
+        consensus.vDeployments[Consensus::DEPLOYMENT_BIP147].nStartTime = 0;
+        consensus.vDeployments[Consensus::DEPLOYMENT_BIP147].nTimeout = 999999999999ULL;
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");

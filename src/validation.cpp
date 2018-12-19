@@ -1275,7 +1275,7 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
         return 0;
     }
 
-    // Initial Supply 5% used for bounties, refferal, development, servers...
+    // Initial Supply 5% used for bounties, development, servers...
     if(nPrevHeight <= 100){
         return MAX_MONEY*5/100/100;
     }
@@ -1283,15 +1283,17 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
     double nSubsidyBase = 3600 - (double)nPrevHeight/1440 * 15;
     if (nSubsidyBase <= 680) nSubsidyBase = 680;
         
-    CAmount nSubsidy = nSubsidyBase * COIN;
+    CAmount nSubsidy = nSubsidyBase * COIN;    
 
     // yearly decline of production by 5% per 6 months 
     for (int i = consensusParams.nSubsidyHalvingInterval; i <= nPrevHeight; i += consensusParams.nSubsidyHalvingInterval) {
         nSubsidy -= nSubsidy/20;
     }
 
-    // Hard fork to reduce the block reward by 20 extra percent (allowing budget/superblocks)
-    CAmount nSuperblockPart = (nPrevHeight > consensusParams.nBudgetPaymentsStartBlock) ? nSubsidy/20 : 0;
+    // Hard fork to reduce the block reward by 15 extra percent (allowing budget/superblocks)
+    
+    CAmount nSuperblockPart = (nPrevHeight > consensusParams.nBudgetPaymentsStartBlock) ? (sporkManager.IsSporkActive(SPORK_15_INCREASE_REWARD)? nSubsidy * 0.15 : nSubsidy/20) : 0;
+    
    
     return fSuperblockPartOnly ? nSuperblockPart : nSubsidy - nSuperblockPart;
 }
@@ -1299,7 +1301,8 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
 CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
 {
     int nMNStartBlock = Params().GetConsensus().nMasternodePaymentsStartBlock;
-    CAmount ret = blockValue/4 + ((nHeight - nMNStartBlock) / 1440 / 6); // start at 25%
+    
+    CAmount ret = sporkManager.IsSporkActive(SPORK_15_INCREASE_REWARD) ? blockValue * 0.4 + (double)nHeight / 1440 / 6 : blockValue/4 + ((nHeight - nMNStartBlock) / 1440 / 6); // start at 25%
     CAmount target = blockValue * 80 / 100; // up to 80%
 
     return ret > target ? target : ret;
@@ -2074,6 +2077,10 @@ static bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockInd
     if (VersionBitsState(pindex->pprev, chainparams.GetConsensus(), Consensus::DEPLOYMENT_CSV, versionbitscache) == THRESHOLD_ACTIVE) {
         flags |= SCRIPT_VERIFY_CHECKSEQUENCEVERIFY;
         nLockTimeFlags |= LOCKTIME_VERIFY_SEQUENCE;
+    }
+
+    if (VersionBitsState(pindex->pprev, chainparams.GetConsensus(), Consensus::DEPLOYMENT_BIP147, versionbitscache) == THRESHOLD_ACTIVE) {
+        flags |= SCRIPT_VERIFY_NULLDUMMY;
     }
 
     int64_t nTime2 = GetTimeMicros(); nTimeForks += nTime2 - nTime1;
