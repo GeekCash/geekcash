@@ -7,7 +7,7 @@
 #define BITCOIN_BITCOINCONSENSUS_H
 
 #if defined(BUILD_BITCOIN_INTERNAL) && defined(HAVE_CONFIG_H)
-#include "config/dash-config.h"
+#include "config/geekcash-config.h"
   #if defined(_WIN32)
     #if defined(DLL_EXPORT)
       #if defined(HAVE_FUNC_ATTRIBUTE_DLLEXPORT)
@@ -41,6 +41,7 @@ typedef enum geekcashconsensus_error_t
     geekcashconsensus_ERR_TX_DESERIALIZE,
     geekcashconsensus_ERR_INVALID_FLAGS,
 } geekcashconsensus_error;
+
 
 /** Script verification flags */
 enum
